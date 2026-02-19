@@ -18,6 +18,72 @@ _NOTE: Only works on Chrome and Edge. Firefox and Safari are hopefully supported
 
 [![](https://dcbadge.limes.pink/api/server/https://discord.gg/TbxJST2BbC)](https://discord.gg/TbxJST2BbC)
 
+# Install
+
+## Step 1: Install COLMAP
+
+Example (Mac OS)
+
+```
+brew install colmap
+```
+
+## Step 2: Clone this Repo and Install
+
+Install Rust and Cargo
+```
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+```
+
+Check
+```
+which cargo                             
+cargo --version
+which rustc
+rustc --version
+```
+
+```
+rustup target add wasm32-unknown-unknown
+```
+
+Install Node Packages
+```
+npm install
+```
+
+# Use
+
+## COLMAP Reconstruction
+
+If using a video, need to run `ffmpeg` first to sample frames:
+```
+ffmpeg -i input_video.mp4 -qscale:v 1 -qmin 1 -r 10 output_folder/%04d.jpg
+```
+
+Then, run COLMAP in CLI:
+```
+colmap gui
+```
+
+- Create Project: Click File > New project. 
+- Select a database file (e.g., project.db) and the folder containing your extracted images.
+- Feature Extraction: Go to Processing > Feature extraction. Leave default settings (SIFT) and click Run.
+- Feature Matching: Go to Processing > Feature matching. For video, Sequential matcher is recommended. Click Run.
+- Reconstruction: Go to Reconstruction > Start reconstruction.
+- Export Model.
+
+## Brush 3DGS Reconstruction
+
+Go to `./brush`, Then:
+```
+cargo run
+```
+
+---
+
+
+
 # Features
 
 ## Training
