@@ -60,6 +60,10 @@ If using a video, need to run `ffmpeg` first to sample frames:
 ```
 ffmpeg -i input_video.mp4 -qscale:v 1 -qmin 1 -r 10 output_folder/%04d.jpg
 ```
+or extract keyframes only (reduce motion blur)
+```
+ffmpeg -i input_video.mp4 -vf "select='eq(pict_type,I)'" -vsync vfr -qscale:v 1 output_folder/%04d.jpg
+```
 
 Then, run COLMAP in CLI:
 ```
